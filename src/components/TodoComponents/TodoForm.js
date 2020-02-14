@@ -29,8 +29,10 @@ class TodoForm extends Component {
       <form onSubmit={this.submitTodo}>
         {/* This is an uncontrolled component 😬 We want it to be controlled by state */}
         <input type="text" name="task" onChange={this.handleChanges} />
-        <button>Add</button>
+        <button className="addBtn">Add</button>      
       </form>
+      
+      
     );
   }
 }

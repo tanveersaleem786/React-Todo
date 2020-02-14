@@ -5,28 +5,15 @@ import TodoForm from './components/TodoComponents/TodoForm';
 
 import "./components/TodoComponents/Todo.css";
 
-const todos =
-[
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  }
-];
+const todos = JSON.parse(localStorage.getItem('saveTodo'));
+//console.log("afdsaf",todos);
 
 class App extends React.Component {
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+ 
   constructor() {
     super();
     this.state = {
-      todos
+      todos: todos
     };
   }
 
@@ -42,6 +29,10 @@ class App extends React.Component {
     this.setState({
       todos: [...this.state.todos, newTodo]
     });
+
+    console.log(this.state.todos);
+   
+
   }
 
   // this is a method of App
@@ -66,23 +57,33 @@ class App extends React.Component {
 
   clearCompleted = e => {
     e.preventDefault();
-    console.log(this.state.todos);
+    //console.log(this.state.todos);
     this.setState({
-      // returns the items that haven't been purchased and purges
-      // the ones that have been purchased
-      todos: this.state.todos.filter(todo => todo.completed === false)
+           todos: this.state.todos.filter(todo => todo.completed === false)
     });
-    console.log(this.state.todos);
+     
+    //console.log(this.state.todos);
   };
+
+  componentDidUpdate(prevProps, prevState) {    
+    //console.log(prevState.todos.length); 
+    //console.log(this.state.todos.length);    
+
+    if (prevState.todos.length !== this.state.todos.length) {
+        localStorage.setItem('saveTodo', JSON.stringify(this.state.todos));
+    }
+  }
 
 
   render() {
     return (
-      <div>
+    <div>
+      <div id="myDIV" className="header">
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm addTodo={this.addTodo} />
-        <TodoList  todos={this.state.todos} toggleTodo={this.toggleTodo} clearCompleted={this.clearCompleted}/>
+        <TodoForm addTodo={this.addTodo} />              
       </div>
+      <TodoList  todos={this.state.todos} toggleTodo={this.toggleTodo} clearCompleted={this.clearCompleted}/> 
+    </div>
     );
   }
 }

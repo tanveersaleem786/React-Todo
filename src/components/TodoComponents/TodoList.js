@@ -7,15 +7,19 @@ import Todo from './Todo';
 const TodoList = props => {
     // console.log(props);
     // const sortedList = props.groceries.sort((a, b) => a.purchased - b.purchased);
+
     return (
-      <div className="shopping-list">
-        {props.todos.map(todo => (
-          <Todo key={todo.id} todo={todo} toggleTodo={props.toggleTodo} />
-        ))}
-        <button className="clear-btn" onClick={props.clearCompleted}>
-          Clear Completed
-        </button>
-      </div>
+       <div>
+        <ul id="myUL">
+          
+            {props.todos !== '' && props.todos.map(todo => (
+             <Todo key={todo.id} todo={todo} toggleTodo={props.toggleTodo} />
+            ))} 
+          
+                   
+         </ul>
+        <button className="addBtn  completedBtn" onClick={props.clearCompleted}>Clear Completed</button>
+       </div> 
     );
   };
   
