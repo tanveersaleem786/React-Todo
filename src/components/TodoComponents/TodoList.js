@@ -10,9 +10,8 @@ const TodoList = props => {
 
     return (
        <div>
-        <ul id="myUL">
-          
-            {props.todos !== '' && props.todos.map(todo => (
+        <ul id="myUL">          
+            {props.todos !== null && props.todos.map(todo => (
              <Todo key={todo.id} todo={todo} toggleTodo={props.toggleTodo} />
             ))} 
           

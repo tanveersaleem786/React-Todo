@@ -5,15 +5,14 @@ import TodoForm from './components/TodoComponents/TodoForm';
 
 import "./components/TodoComponents/Todo.css";
 
-const todos = JSON.parse(localStorage.getItem('saveTodo'));
-//console.log("afdsaf",todos);
+//localStorage.removeItem('saveTodo')
 
 class App extends React.Component {
  
   constructor() {
     super();
     this.state = {
-      todos: todos
+      todos: ((JSON.parse(localStorage.getItem('saveTodo') === null)) ? [] : JSON.parse(localStorage.getItem('saveTodo')))
     };
   }
 
